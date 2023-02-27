@@ -64,7 +64,7 @@ def tok2int_sent(example, tokenizer, max_seq_length):
     input_mask = [1] * len(input_ids)
 
 
-    max_len = max_seq_length * 2 + 3
+    max_len = max_seq_length * 2 + 4
     labels += [PAD_ID] * (max_len - len(input_ids))
     padding = [0] * (max_len - len(input_ids))
     input_ids += padding

@@ -51,8 +51,8 @@ def eval_model(model, validset_reader, args):
         for inp_tensor, msk_tensor, seg_tensor, score_tensor  in validset_reader:
             prob = model(inp_tensor, msk_tensor, seg_tensor)
             predict = torch.max(prob, -1)[1].type_as(score_tensor)
-            predict = predict.view([-1, args.evi_num, args.max_len * 2 + 3])
-            score_tensor = score_tensor.view([-1, args.evi_num, args.max_len * 2 + 3])
+            predict = predict.view([-1, args.evi_num, args.max_len * 2 + 4])
+            score_tensor = score_tensor.view([-1, args.evi_num, args.max_len * 2 + 4])
             score_tensor = score_tensor[:, 0]
             predict = predict[:, 0, :]
             predict = predict.contiguous().view(-1).tolist()

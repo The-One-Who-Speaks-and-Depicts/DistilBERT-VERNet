@@ -15,7 +15,7 @@ class inference_model(nn.Module):
         self.proj_hidden = nn.Linear(self.bert_hidden_dim * 3, 4)
         self.evi_num = args.evi_num
         self.model_name = args.bert_pretrain
-        self.max_len = args.max_len * 2 + 3
+        self.max_len = args.max_len * 2 + 4
         self.proj_select = nn.Linear(self.bert_hidden_dim, self.bert_hidden_dim)
         self.proj_select_score = nn.Linear(self.bert_hidden_dim * 3, 1)
         self.proj_attention = nn.Linear(self.bert_hidden_dim, self.bert_hidden_dim)
