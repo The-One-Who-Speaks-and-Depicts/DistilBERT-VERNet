@@ -124,7 +124,7 @@ if __name__ == "__main__":
     parser.add_argument("--bert_hidden_dim", default=768, type=int, help="Total batch size for training.")
     parser.add_argument("--valid_batch_size", default=4, type=int, help="Total batch size for predictions.")
     parser.add_argument('--outdir', required=True, help='path to output directory')
-    parser.add_argument("--max_len", default=120, type=int,
+    parser.add_argument("--max_len", default=4, type=int,
                         help="The maximum total input sequence length after WordPiece tokenization. Sequences "
                              "longer than this will be truncated, and sequences shorter than this will be padded.")
     parser.add_argument("--eval_step", default=500, type=int,

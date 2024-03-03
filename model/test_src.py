@@ -51,8 +51,8 @@ def eval_model(model, validset_reader, args):
         for inp_tensor, msk_tensor, seg_tensor, score_tensor  in validset_reader:
             prob = model(inp_tensor, msk_tensor, seg_tensor)
             predict = torch.max(prob, -1)[1].type_as(score_tensor)
-            predict = predict.view([-1, args.evi_num, args.max_len * 2 + 3])
-            score_tensor = score_tensor.view([-1, args.evi_num, args.max_len * 2 + 3])
+            predict = predict.view([-1, args.evi_num, args.max_len * 2 + 4])
+            score_tensor = score_tensor.view([-1, args.evi_num, args.max_len * 2 + 4])
             score_tensor = score_tensor[:, 0]
             predict = predict[:, 0, :]
             predict = predict.contiguous().view(-1).tolist()
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     parser.add_argument("--bert_hidden_dim", default=768, type=int, help="Total batch size for training.")
     parser.add_argument("--evi_num", default=5, type=int,
                         help="evidence number")
-    parser.add_argument("--max_len", default=120, type=int,
+    parser.add_argument("--max_len", default=4, type=int,
                         help="The maximum total input sequence length after WordPiece tokenization. Sequences "
                              "longer than this will be truncated, and sequences shorter than this will be padded.")
     args = parser.parse_args()
