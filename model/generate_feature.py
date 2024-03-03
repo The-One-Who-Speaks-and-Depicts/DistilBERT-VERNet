@@ -100,7 +100,7 @@ def eval_model(model, tokenizer, args):
             seg_tensor = seg_tensor.cuda()
             lab_tensor = lab_tensor.cuda()
             prob = model(inp_tensor, msk_tensor, seg_tensor, score_flag = False)
-            prob = prob.view(-1, args.max_len , 4)
+            prob = prob.view(-1, args.max_len * 2 + 4, 4)
             prob = prob[:, :, :2]
             prob = F.softmax(prob, -1)
             prob = prob[:, :, 1].squeeze(-1)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     parser.add_argument('--bert_pretrain', required=True)
     parser.add_argument('--checkpoint', required=True)
     parser.add_argument("--bert_hidden_dim", default=768, type=int, help="Total batch size for training.")
-    parser.add_argument("--max_len", default=120, type=int,
+    parser.add_argument("--max_len", default=4, type=int,
                         help="The maximum total input sequence length after WordPiece tokenization. Sequences "
                              "longer than this will be truncated, and sequences shorter than this will be padded.")
     args = parser.parse_args()
